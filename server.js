@@ -1,6 +1,14 @@
 const express = require ('express')
 const app = express();
 const path = require('path')
+require('dotenv').config();
+const port = process.env.PORT || 4000
+const bodyParser = require('body-parser');
+const cors = require ('cors');
+
+app.use(bodyParser.json()); 
+app.use(cors()); 
+
 app.use(express.static(path.join(__dirname,'build')));
 
 app.get("/", (req,res)=>{
@@ -12,4 +20,4 @@ app.get('*', (req, res) => {
     res.redirect('/')
 })
 
-app.listen(5000);
+app.listen(port);
